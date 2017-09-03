@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 
@@ -15,6 +16,7 @@ import android.view.SurfaceView
 class MySurfaceView(val ctext: Context, attributeSet: AttributeSet): SurfaceView(ctext, attributeSet), SurfaceHolder.Callback {
 
     lateinit var myThread: MyThread
+    val dataModel = Model()
 
     init {
         val h = holder
@@ -47,10 +49,28 @@ class MySurfaceView(val ctext: Context, attributeSet: AttributeSet): SurfaceView
 
     public fun doDraw(canvas: Canvas) {
         canvas.drawColor(Color.WHITE)
-        val p = Paint()
-        p.color = Color.YELLOW
-        p.style = Paint.Style.FILL
-        canvas.drawRect(Rect(20, 20, 100, 100), p)
+        val yellowPaint = Paint()
+        yellowPaint.color = Color.YELLOW
+        yellowPaint.style = Paint.Style.FILL
+
+        if(dataModel.hasPoints()){
+            for(p in dataModel.pointList){
+                canvas.drawCircle(p.x, p.y, 20.0f, yellowPaint )
+            }
+        }
+
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        super.onTouchEvent(event)
+        event?.let {
+            val x = it.x
+            val y = it.y
+
+            dataModel.addPoint(x, y)
+        }
+
+        return false
     }
 
     class MyThread(val holder: SurfaceHolder, val ctext: Context, val mySurfaceView: MySurfaceView): Thread() {

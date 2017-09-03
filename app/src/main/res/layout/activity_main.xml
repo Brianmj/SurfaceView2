@@ -8,7 +8,26 @@
     tools:context="com.brianj.surfaceview2.MainActivity">
 
     <com.brianj.surfaceview2.MySurfaceView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:id="@+id/mySurfaceView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </com.brianj.surfaceview2.MySurfaceView>
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mySurfaceView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="467dp"/>
 
 </android.support.constraint.ConstraintLayout>
